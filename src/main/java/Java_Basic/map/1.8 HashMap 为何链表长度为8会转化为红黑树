@@ -1,0 +1,44 @@
+链表的查找性能是O（n）而数结构能提升到O（log（n））
+
+当链表长度很小的时候，即使遍历，速度也非常快，但是当链表长度不断变长，肯定会对查询性能有一定的影响，所以才需要转成树。
+
+TreeNodes占用空间是普通Nodes的两倍，所以只有当bin包含足够多的节点时才会转成TreeNodes，而是否足够多就是由TREEIFY_THRESHOLD的值决定的。
+当bin中节点数变少时，又会转成普通的bin。并且我们查看源码的时候发现，链表长度达到8就转成红黑树，当长度降到6就转成普通bin。
+
+这样就解析了为什么不是一开始就将其转换为TreeNodes，而是需要一定节点数才转为TreeNodes，说白了就是trade-off，空间和时间的权衡：
+
+Because TreeNodes are about twice the size of regular nodes, we
+use them only when bins contain enough nodes to warrant use
+(see TREEIFY_THRESHOLD). And when they become too small (due to
+removal or resizing) they are converted back to plain bins.  In
+usages with well-distributed user hashCodes, tree bins are
+rarely used.  Ideally, under random hashCodes, the frequency of
+nodes in bins follows a Poisson distribution
+(http://en.wikipedia.org/wiki/Poisson_distribution) with a
+parameter of about 0.5 on average for the default resizing
+threshold of 0.75, although with a large variance because of
+resizing granularity. Ignoring variance, the expected
+occurrences of list size k are (exp(-0.5)*pow(0.5, k)/factorial(k)).
+The first values are:
+0:    0.60653066
+1:    0.30326533
+2:    0.07581633
+3:    0.01263606
+4:    0.00157952
+5:    0.00015795
+6:    0.00001316
+7:    0.00000094
+8:    0.00000006
+more: less than 1 in ten million
+
+当hashCode离散性很好的时候，树型bin用到的概率非常小，因为数据均匀分布在每个bin中，几乎不会有bin中链表长度会达到阈值。但是在随机hashCode下，离散性可能会变差，
+然而JDK又不能阻止用户实现这种不好的hash算法，因此就可能导致不均匀的数据分布。
+不过理想情况下随机hashCode算法下所有bin中节点的分布频率会遵循泊松分布，我们可以看到，一个bin中链表长度达到8个元素的概率为0.00000006，几乎是不可能事件。
+所以，之所以选择8，不是拍拍屁股决定的，而是根据概率统计决定的。由此可见，发展30年的Java每一项改动和优化都是非常严谨和科学的。
+
+红黑树的平均查找长度是log(n)，如果长度为8，平均查找长度为log(8)=3，链表的平均查找长度为n/2，当长度为8时，平均查找长度为8/2=4，这才有转换成树的必要；
+链表长度如果是小于等于6，6/2=3，而log(6)=2.6，虽然速度也很快的，但是转化为树结构和生成树的时间并不会太短。
+
+
+
+截自：https://blog.csdn.net/jerry_player/article/details/88970707

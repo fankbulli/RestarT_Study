@@ -1,0 +1,36 @@
+tableSizeFor方法:返回一个大于输入参数且最小的为2的n次幂的数。
+
+/**
+ * 根据容量参数，返回一个2的n次幂的table长度。
+ */
+private static final int tableSizeFor(int c) {
+    int n = c - 1;
+    n |= n >>> 1;
+    n |= n >>> 2;
+    n |= n >>> 4;
+    n |= n >>> 8;
+    n |= n >>> 16;
+    return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}
+public static void main(String[] args) {
+    System.out.println(tableSizeFor(1));
+    System.out.println(tableSizeFor(5));
+    System.out.println(tableSizeFor(25));
+    System.out.println(tableSizeFor(125));
+    System.out.println(tableSizeFor(625));
+}
+
+输出：
+1
+8
+32
+128
+1024
+
+解释：输入23--二进制--> 10111
+           右移一位--> 01011
+            或操作--->11111
+           右移两位--> 00111
+            或操作--->11111
+           ........之后都相同操作
+      转为10进制+1--->31+1=32

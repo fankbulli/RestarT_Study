@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2021. Shanghai TongYan Civil Engineering Technology Corp., Ltd. All rights reserved.
- */
 package pdf.replace;
 
 import com.google.common.collect.Lists;
@@ -12,13 +9,6 @@ import com.itextpdf.text.pdf.parser.TextRenderInfo;
 import lombok.Data;
 
 import java.util.List;
-
-/**
- * Description: 一句话描述此类
- *
- * @author 钟鸣
- * @Date 2021/1/27 16:35
- */
 @Data
 public class KeyWordPositionListener implements RenderListener {
     private String keyword;

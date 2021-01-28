@@ -75,28 +75,6 @@
             <version>${tapestry-version}</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Uncomment this to add support for hibernate, bean validation and file uploads -->
-        <!--
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-hibernate</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-beanvalidator</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-upload</artifactId>
-            <version>${tapestry-version}</version>
-            <scope>compile</scope>
-        </dependency>
-        -->
-        <!-- Unit Testing -->
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-test</artifactId>
@@ -194,7 +172,35 @@
             <version>${servlet-api-version}</version>
             <scope>provided</scope>
         </dependency>
+
+
+        <!-- Hutool工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.2</version>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-asian</artifactId>
+            <version>5.2.0</version>
+        </dependency>
     </dependencies>
+
+
+
+
 	<build>
 		<plugins>
 			<plugin>

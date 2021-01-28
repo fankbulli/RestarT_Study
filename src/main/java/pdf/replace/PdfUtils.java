@@ -45,7 +45,7 @@ public class PdfUtils {
         String dest = "C:\\Users\\steve\\Desktop\\pdfTest.pdf";
 //    根据类来替换
         Test test=new Test();
-        test.setName("钟鸣");
+        test.setName("张三");
         test.setSex("男");
         test.setStu("本科");
         batchReplace(src,dest,Test.class,test);

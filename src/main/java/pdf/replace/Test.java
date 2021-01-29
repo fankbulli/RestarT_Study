@@ -9,5 +9,4 @@ public class Test {
     private String sex;
     private Integer age;
     private String stu;
-    private String id;
 }

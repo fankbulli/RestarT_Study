@@ -4,6 +4,7 @@ public enum KeyEnum {
     姓名("name", "姓名&"),
     性别("sex", "性别&"),
     年龄("age", "年龄&"),
+    ID("id", "ID&"),
     学历("stu", "学历&");
 
     //属性

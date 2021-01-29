@@ -204,16 +204,21 @@ public class PdfUtils {
      */
     public static  Map<String,String> autoKeyValue(Class clazz,Object obj){
         Map<String,String> map=new HashMap<>();
-        Field[] fields=clazz.getDeclaredFields();
-        for (Field field:fields){
+        for(KeyEnum keyEnum:KeyEnum.values()){
+            Field field= null;
             try {
-                field.setAccessible(true);
-                Object o=field.get(obj);
-                if (null!=o){
-                    map.put(KeyEnum.value(field.getName()),o.toString());
-                }else {
-                    map.put(KeyEnum.value(field.getName()),"");
+                field = clazz.getDeclaredField(keyEnum.getProperty());
+                if (null != field){
+                    field.setAccessible(true);
+                    Object o= field.get(obj);
+                    if (null!=o){
+                        map.put(keyEnum.getKeyWord(),o.toString());
+                    }else {
+                        map.put(keyEnum.getKeyWord(),"");
+                    }
                 }
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }

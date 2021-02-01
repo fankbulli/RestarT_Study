@@ -206,7 +206,6 @@ public class PdfUtils {
         Field[] fields=clazz.getDeclaredFields();
         Map<String,String> objectMap=new HashMap<>();
         for (Field field:fields){
-            field.setAccessible(true);
             try {
                 field.setAccessible(true);
                 Object o= field.get(obj);
